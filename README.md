@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox  # Import messagebox for error handling
 
 # Global variables
 main_window = None
@@ -27,16 +28,17 @@ def print_item_details():
     Label(main_window, font=("Helvetica 10 bold"), text="Quantity", bg="beige").grid(column=4, row=7)
     
     # Add each item in the list into its own row
-    for name_count in range(counters['total_entries']):
-        Label(main_window, text=name_count, b="beige").grid(column=0, row=name_count + 8)
-        Label(main_window, text=(hire_details[name_count][0]), bg="beige").grid(column=1, row=name_count + 8)
-        Label(main_window, text=(hire_details[name_count][1]), bg="beige").grid(column=2, row=name_count + 8)
-        Label(main_window, text=(hire_details[name_count][2]), bg="beige").grid(column=3, row=name_count + 8)
-        Label(main_window, text=(hire_details[name_count][3]), bg="beige").grid(column=4, row=name_count + 8)
+    for index, hire_detail in enumerate(hire_details):
+        row_number = index + 8  # Start from row 8 onwards
+        Label(main_window, text=index, bg="beige").grid(column=0, row=row_number)
+        Label(main_window, text=hire_detail[0], bg="beige").grid(column=1, row=row_number)
+        Label(main_window, text=hire_detail[1], bg="beige").grid(column=2, row=row_number)
+        Label(main_window, text=hire_detail[2], bg="beige").grid(column=3, row=row_number)
+        Label(main_window, text=hire_detail[3], bg="beige").grid(column=4, row=row_number)
 
 # Clear labels function
 def clear_labels():
-    # Clear previous labels in the rows
+    # Clear previous labels in the rows starting from row 8
     for widget in main_window.grid_slaves():
         if int(widget.grid_info()["row"]) >= 8:
             widget.grid_forget()
@@ -45,26 +47,40 @@ def clear_labels():
 def append_item():
     global hire_details, counters
     # Check full name is not blank and the quantity is between 1 and 500
-    if len(entry_full_name.get()) != 0 and 1 <= int(entry_quantity.get()) <= 500:
-        # Append each item to its own area of the list
-        hire_details.append([entry_full_name.get(), entry_receipt_number.get(), entry_item_hired.get(), entry_quantity.get()])
-        # Clear the boxes
-        entry_full_name.delete(0, 'end')
-        entry_receipt_number.delete(0, 'end')
-        entry_item_hired.delete(0, 'end')
-        entry_quantity.delete(0, 'end')
-        counters['total_entries'] += 1
+    if len(entry_full_name.get()) != 0:
+        try:
+            quantity = int(entry_quantity.get())
+            if 1 <= quantity <= 500:
+                # Append each item to its own area of the list
+                hire_details.append([entry_full_name.get(), entry_receipt_number.get(), entry_item_hired.get(), str(quantity)])
+                # Clear the boxes
+                entry_full_name.delete(0, 'end')
+                entry_receipt_number.delete(0, 'end')
+                entry_item_hired.delete(0, 'end')
+                entry_quantity.delete(0, 'end')
+                counters['total_entries'] += 1
+            else:
+                messagebox.showerror("Error", "Quantity must be between 1 and 500.")
+        except ValueError:
+            messagebox.showerror("Error", "Quantity must be a valid integer.")
+    else:
+        messagebox.showerror("Error", "Customer Full Name cannot be blank.")
 
 # Delete a row from the list
 def delete_row():
     global hire_details, counters
     # Find which row is to be deleted and delete it
-    index_to_delete = int(delete_item.get())
-    if 0 <= index_to_delete < counters['total_entries']:
-        del hire_details[index_to_delete]
-        counters['total_entries'] -= 1
-        clear_labels()
-        print_item_details()
+    try:
+        index_to_delete = int(delete_item.get())
+        if 0 <= index_to_delete < counters['total_entries']:
+            del hire_details[index_to_delete]
+            counters['total_entries'] -= 1
+            clear_labels()
+            print_item_details()
+        else:
+            messagebox.showerror("Error", "Row number out of range.")
+    except ValueError:
+        messagebox.showerror("Error", "Row number must be a valid integer.")
     delete_item.delete(0, 'end')
 
 # Create the buttons and labels
@@ -111,4 +127,3 @@ def main():
 # Entry point of the program
 if __name__ == "__main__":
     main()
-
