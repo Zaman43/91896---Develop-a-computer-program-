@@ -118,6 +118,7 @@ def setup_buttons():
 def main():
     global main_window
     main_window = Tk()
+    main_window.title("Julie's Party Hire Store")  # Set window title
     main_window.configure(bg='beige')  # Set background color to beige
     
     setup_buttons()
