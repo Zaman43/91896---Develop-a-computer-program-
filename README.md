@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import messagebox  # Import messagebox for error handling
+from tkinter import messagebox
 
 # Global variables
 main_window = None
@@ -20,21 +20,21 @@ def print_item_details():
     # Clear existing labels before printing again
     clear_labels()
     
-    # Create the column headings
-    Label(main_window, font=("Helvetica 10 bold"), text="Row", bg="beige").grid(column=0, row=7)
-    Label(main_window, font=("Helvetica 10 bold"), text="Customer Full Name", bg="beige").grid(column=1, row=7)
-    Label(main_window, font=("Helvetica 10 bold"), text="Receipt Number", bg="beige").grid(column=2, row=7)
-    Label(main_window, font=("Helvetica 10 bold"), text="Item Hired", bg="beige").grid(column=3, row=7)
-    Label(main_window, font=("Helvetica 10 bold"), text="Quantity", bg="beige").grid(column=4, row=7)
+    # Create the column headings with bold and outlined appearance
+    Label(main_window, font=("Helvetica 10 bold"), text="Row", bg="#0077b6", fg="white", borderwidth=1, relief="solid").grid(column=0, row=7, sticky="nsew")
+    Label(main_window, font=("Helvetica 10 bold"), text="Customer Full Name", bg="#0077b6", fg="white", borderwidth=1, relief="solid").grid(column=1, row=7, sticky="nsew")
+    Label(main_window, font=("Helvetica 10 bold"), text="Receipt Number", bg="#0077b6", fg="white", borderwidth=1, relief="solid").grid(column=2, row=7, sticky="nsew")
+    Label(main_window, font=("Helvetica 10 bold"), text="Item Hired", bg="#0077b6", fg="white", borderwidth=1, relief="solid").grid(column=3, row=7, sticky="nsew")
+    Label(main_window, font=("Helvetica 10 bold"), text="Quantity", bg="#0077b6", fg="white", borderwidth=1, relief="solid").grid(column=4, row=7, sticky="nsew")
     
     # Add each item in the list into its own row
     for index, hire_detail in enumerate(hire_details):
         row_number = index + 8  # Start from row 8 onwards
-        Label(main_window, text=index, bg="beige").grid(column=0, row=row_number)
-        Label(main_window, text=hire_detail[0], bg="beige").grid(column=1, row=row_number)
-        Label(main_window, text=hire_detail[1], bg="beige").grid(column=2, row=row_number)
-        Label(main_window, text=hire_detail[2], bg="beige").grid(column=3, row=row_number)
-        Label(main_window, text=hire_detail[3], bg="beige").grid(column=4, row=row_number)
+        Label(main_window, text=index, bg="#0077b6", fg="white", borderwidth=1, relief="solid").grid(column=0, row=row_number, sticky="nsew")
+        Label(main_window, text=hire_detail[0], bg="#caf0f8", borderwidth=1, relief="solid").grid(column=1, row=row_number, sticky="nsew")
+        Label(main_window, text=hire_detail[1], bg="#caf0f8", borderwidth=1, relief="solid").grid(column=2, row=row_number, sticky="nsew")
+        Label(main_window, text=hire_detail[2], bg="#caf0f8", borderwidth=1, relief="solid").grid(column=3, row=row_number, sticky="nsew")
+        Label(main_window, text=hire_detail[3], bg="#caf0f8", borderwidth=1, relief="solid").grid(column=4, row=row_number, sticky="nsew")
 
 # Clear labels function
 def clear_labels():
@@ -87,39 +87,39 @@ def delete_row():
 def setup_buttons():
     global main_window, entry_full_name, entry_receipt_number, entry_item_hired, entry_quantity, delete_item
     
-    main_window.configure(bg='beige')  # Set background color to beige
+    main_window.configure(bg='#caf0f8')  # Set background color to light blue
     
-    Label(main_window, text="Customer Full Name").grid(column=0, row=0, padx=10, pady=10)
-    Label(main_window, text="Receipt Number").grid(column=0, row=1, padx=10, pady=10)
-    Button(main_window, text="Quit", command=quit).grid(column=2, row=1, padx=10, pady=10)
-    Button(main_window, text="Append Details", command=append_item).grid(column=3, row=1, padx=10, pady=10)
-    Button(main_window, text="Print Details", command=print_item_details).grid(column=4, row=1, padx=10, pady=10)
-    Label(main_window, text="Item Hired").grid(column=0, row=2, padx=10, pady=10)
-    Label(main_window, text="Quantity").grid(column=0, row=3, padx=10, pady=10)
-    Label(main_window, text="Row #").grid(column=2, row=3, padx=10, pady=10)
-    Button(main_window, text="Delete", command=delete_row).grid(column=4, row=3, padx=10, pady=10)
+    Label(main_window, text="Customer Full Name", bg="#0077b6", fg="white", borderwidth=1, relief="solid").grid(column=0, row=0, padx=10, pady=10, sticky="nsew")
+    Label(main_window, text="Receipt Number", bg="#0077b6", fg="white", borderwidth=1, relief="solid").grid(column=0, row=1, padx=10, pady=10, sticky="nsew")
+    Button(main_window, text="Quit", command=quit, bg="#003459", fg="white", relief="raised").grid(column=2, row=1, padx=10, pady=10, sticky="nsew")
+    Button(main_window, text="Append Details", command=append_item, bg="#003459", fg="white", relief="raised").grid(column=3, row=1, padx=10, pady=10, sticky="nsew")
+    Button(main_window, text="Print Details", command=print_item_details, bg="#003459", fg="white", relief="raised").grid(column=4, row=1, padx=10, pady=10, sticky="nsew")
+    Label(main_window, text="Item Hired", bg="#0077b6", fg="white", borderwidth=1, relief="solid").grid(column=0, row=2, padx=10, pady=10, sticky="nsew")
+    Label(main_window, text="Quantity", bg="#0077b6", fg="white", borderwidth=1, relief="solid").grid(column=0, row=3, padx=10, pady=10, sticky="nsew")
+    Label(main_window, text="Row #", bg="#0077b6", fg="white", borderwidth=1, relief="solid").grid(column=2, row=3, padx=10, pady=10, sticky="nsew")
+    Button(main_window, text="Delete", command=delete_row, bg="#003459", fg="white", relief="raised").grid(column=4, row=3, padx=10, pady=10, sticky="nsew")
     
-    entry_full_name = Entry(main_window, highlightbackground='beige', highlightcolor='beige')
-    entry_full_name.grid(column=1, row=0, padx=10, pady=10)
+    entry_full_name = Entry(main_window, highlightbackground='#caf0f8', highlightcolor='#caf0f8')
+    entry_full_name.grid(column=1, row=0, padx=10, pady=10, sticky="nsew")
     
-    entry_receipt_number = Entry(main_window, highlightbackground='beige', highlightcolor='beige')
-    entry_receipt_number.grid(column=1, row=1, padx=10, pady=10)
+    entry_receipt_number = Entry(main_window, highlightbackground='#caf0f8', highlightcolor='#caf0f8')
+    entry_receipt_number.grid(column=1, row=1, padx=10, pady=10, sticky="nsew")
     
-    entry_item_hired = Entry(main_window, highlightbackground='beige', highlightcolor='beige')
-    entry_item_hired.grid(column=1, row=2, padx=10, pady=10)
+    entry_item_hired = Entry(main_window, highlightbackground='#caf0f8', highlightcolor='#caf0f8')
+    entry_item_hired.grid(column=1, row=2, padx=10, pady=10, sticky="nsew")
     
-    entry_quantity = Entry(main_window, highlightbackground='beige', highlightcolor='beige')
-    entry_quantity.grid(column=1, row=3, padx=10, pady=10)
+    entry_quantity = Entry(main_window, highlightbackground='#caf0f8', highlightcolor='#caf0f8')
+    entry_quantity.grid(column=1, row=3, padx=10, pady=10, sticky="nsew")
     
-    delete_item = Entry(main_window, highlightbackground='beige', highlightcolor='beige')
-    delete_item.grid(column=3, row=3, padx=10, pady=10)
+    delete_item = Entry(main_window, highlightbackground='#caf0f8', highlightcolor='#caf0f8')
+    delete_item.grid(column=3, row=3, padx=10, pady=10, sticky="nsew")
 
 # Start the program running
 def main():
     global main_window
     main_window = Tk()
     main_window.title("Julie's Party Hire Store")  # Set window title
-    main_window.configure(bg='beige')  # Set background color to beige
+    main_window.configure(bg='#caf0f8')  # Set background color to light blue
     
     setup_buttons()
     
@@ -128,3 +128,4 @@ def main():
 # Entry point of the program
 if __name__ == "__main__":
     main()
+
